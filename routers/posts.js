@@ -1,22 +1,28 @@
 import express from "express";
-import { post } from "../data.js";
+import fs from "fs";
 
 const router = express.Router();
 
 
 // Index
 router.get("/", (req, res) => {
+    const dataJson = fs.readFileSync("./data/content.json")
+    const posts = JSON.parse(dataJson)
+
     res.json({
-        data: post,
-        count: post.length,
+        data: posts,
+        count: posts.length,
     });    
 });
 
 
 // Show
 router.get("/:id", (req, res) => {
+    const dataJson = fs.readFileSync("./data/content.json")
+    const posts = JSON.parse(dataJson)
+
     const postId = req.params.id
-    const singlePost = post.find((curPost) => curPost.id === postId)
+    const singlePost = posts.find((curPost) => curPost.id === postId)
     res.json ({
         data: singlePost
     })
