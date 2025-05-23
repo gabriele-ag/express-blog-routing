@@ -1,5 +1,6 @@
-import express from "express"
-import postRouter from "./routers/posts.js"
+import express from "express";
+import fs from "fs";
+import postRouter from "./routers/posts.js";
 
 const app = express()
 const port = 3000
@@ -14,10 +15,10 @@ app.get("/", (req, res) => {
     res.json(resData)
 })
 
-app.use("./posts", postRouter)
+app.use("/posts", postRouter)
 
 app.listen(port, () => {
-    console.log("Server in ascolto");
+    console.log(`Server in ascolto nella porta ${port}`);
 });
 
 
